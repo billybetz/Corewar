@@ -6,11 +6,11 @@
 /*   By: mmatamou <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/05 17:31:30 by mmatamou          #+#    #+#             */
-/*   Updated: 2017/03/05 18:04:17 by mmatamou         ###   ########.fr       */
+/*   Updated: 2017/03/06 11:27:48 by bbetz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "assemblur.h"
+#include "assembleur.h"
 
 void	writer_init(t_writer **w, t_writer *previous)
 {
@@ -27,7 +27,7 @@ void	putchar_to_w(t_writer **w, unsigned char c)
 		writer_init(&((*w)->nxt), *w);
 		*w = (*w)->nxt;
 	}
-	((*w)->strorer)[(*w)->char_counter] = c;
+	((*w)->storer)[(*w)->char_counter] = c;
 	(*w)->char_counter = (*w)->char_counter + 1;
 }
 
