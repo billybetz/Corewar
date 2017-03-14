@@ -6,14 +6,14 @@
 /*   By: mmatamou <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/04 16:03:26 by mmatamou          #+#    #+#             */
-/*   Updated: 2017/03/06 22:34:28 by mmatamou         ###   ########.fr       */
+/*   Updated: 2017/03/10 21:50:50 by mmatamou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef ASSEMBLEUR_H
 # define ASSEMBLEUR_H
 
-#include "../../include/corewar.h"
+#include "../../include/global.h"
 
 /**/
 #include <stdio.h>

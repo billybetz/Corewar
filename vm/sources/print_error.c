@@ -1,23 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   corewar.h                                          :+:      :+:    :+:   */
+/*   print_error.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bbetz <marvin@42.fr>                       +#+  +:+       +#+        */
+/*   By: mmatamou <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/03/03 16:48:04 by bbetz             #+#    #+#             */
-/*   Updated: 2017/03/05 14:34:09 by mmatamou         ###   ########.fr       */
+/*   Created: 2017/03/10 23:07:56 by mmatamou          #+#    #+#             */
+/*   Updated: 2017/03/12 23:21:21 by mmatamou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef COREWAR_H
-# define COREWAR_H
+#include "corewar.h"
 
-#include "../libft/include/libft.h"
-#include <unistd.h>
-#include <stdlib.h>
-
-#include "op.h"
-#include "../assembleur/include/assembleur.h"
-
-#endif
+int		print_error(char *str)
+{
+	ft_putstr_fd(str, 2);
+	return (-1);
+}
