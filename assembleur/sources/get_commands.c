@@ -6,7 +6,7 @@
 /*   By: mmatamou <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/06 14:31:59 by mmatamou          #+#    #+#             */
-/*   Updated: 2017/03/07 12:47:28 by mmatamou         ###   ########.fr       */
+/*   Updated: 2017/03/13 20:36:04 by bbetz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,6 @@ void		create_cmd(t_commands **cmd, t_commands *previous)
 	(*cmd)->line = NULL;
 	(*cmd)->number_of_bytes = 0;
 	(*cmd)->output_to_file = NULL;
-	(*cmd)->recp_label_needed = 0;
 	((*cmd)->p).tab = NULL;
 	((*cmd)->p).count = 0;
 	((*cmd)->p).coding_byte = 0;

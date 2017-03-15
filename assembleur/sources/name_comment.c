@@ -6,7 +6,7 @@
 /*   By: mmatamou <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/04 18:01:43 by mmatamou          #+#    #+#             */
-/*   Updated: 2017/03/05 18:15:14 by mmatamou         ###   ########.fr       */
+/*   Updated: 2017/03/13 20:51:18 by bbetz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,36 +20,36 @@ int		parse_error(int *infos, char *error_message)
 	return (0);
 }
 
-void	print_corewar_exec_magic(int cor_fd)
+void	print_corewar_exec_magic(char n_c_str[3000], int *p)
 {
 	unsigned int mag;
 	unsigned int mask;
 
 	mask = 0b11111111;
 	mag = COREWAR_EXEC_MAGIC;
-	ft_putchar_fd((mag >> 24) & mask, cor_fd);
-	ft_putchar_fd((mag >> 16) & mask, cor_fd);
-	ft_putchar_fd((mag >> 8) & mask, cor_fd);
-	ft_putchar_fd(mag & mask, cor_fd);
+	n_c_str[(*p)++] = (mag >> 24) & mask;
+	n_c_str[(*p)++] = (mag >> 16) & mask;
+	n_c_str[(*p)++] = (mag >> 8) & mask;
+	n_c_str[(*p)++] = mag & mask;
 }
 
-void	print_zero_name(int j, int cor_fd, int start_name)
+void	print_zero_name(int j, char n_c_str[3000], int *p, int start_name)
 {
 	while (j - start_name < PROG_NAME_LENGTH + 8)
 	{
-		ft_putchar_fd(0x00, cor_fd);
+		n_c_str[(*p)++] = 0x00;
 		j++;
 	}
 }
 
-int		name(char *line, int cor_fd, int *infos)
+int		name(char *line, char n_c_str[3000], int *p, int *infos)
 {
 	int i;
 	int j;
 	int	start_name;
 
 	i = 0;
-	print_corewar_exec_magic(cor_fd);
+	print_corewar_exec_magic(n_c_str, p);
 	if (*infos & PARSE_name)
 		return (parse_error(infos, "Two names in the file\n"));
 	while (line[i] != '\0')
@@ -77,24 +77,24 @@ int		name(char *line, int cor_fd, int *infos)
 	{
 		if (line[j] == '"')
 			return (parse_error(infos, "'\"' in the name\n"));
-		ft_putchar_fd(line[j], cor_fd);
+		n_c_str[(*p)++] = line[j];
 	}
-	print_zero_name(j, cor_fd, start_name);
+	print_zero_name(j, n_c_str, p, start_name);
 	*infos = *infos + PARSE_name;
 	return (0);
 }
 
-void	print_zero_comment(int j, int cor_fd, int start_comment)
+void	print_zero_comment(int j, char n_c_str[3000], int *p, int start_comment)
 {
 	while (j - start_comment < COMMENT_LENGTH + 6)
 	{
-		ft_putchar_fd(0x00, cor_fd);
+		n_c_str[(*p)++] = 0x00;
 		j++;
 	}
 }
 
 
-int     comment(char *line, int cor_fd, int *infos)
+int     comment(char *line, char n_c_str[3000], int *p, int *infos)
 {
 	int i;
 	int j;
@@ -122,20 +122,21 @@ int     comment(char *line, int cor_fd, int *infos)
 	{
 		if (line[j] == '"')
 			return (parse_error(infos, "'\"' in the comment\n"));
-		ft_putchar_fd(line[j], cor_fd);
+		n_c_str[(*p)++] = line[j];
 	}
-	print_zero_comment(j, cor_fd, start_comment);
+	print_zero_comment(j, n_c_str, p, start_comment);
 	*infos = *infos + PARSE_comment;
 	return (0);
 }
 
-void	name_comment(char *line, int cor_fd, int *infos)
+void	name_comment(char *line, char n_c_str[3000], int *p, int *infos)
 {
+	*p = 0;
 	ft_putendl(line);
 	if (ft_strncmp(line, NAME_CMD_STRING, ft_strlen(NAME_CMD_STRING)) == 0)
-		name(line, cor_fd, infos);
+		name(line, n_c_str, p, infos);
 	else if (ft_strncmp(line, COMMENT_CMD_STRING, ft_strlen(COMMENT_CMD_STRING)) == 0)
-		comment(line, cor_fd, infos);
+		comment(line, n_c_str, p, infos);
 	else if ((*infos & PARSE_ERROR) == 0)
 		*infos = *infos + PARSE_ERROR;
 }

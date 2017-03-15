@@ -6,7 +6,7 @@
 /*   By: mmatamou <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/04 16:03:26 by mmatamou          #+#    #+#             */
-/*   Updated: 2017/03/10 21:50:50 by mmatamou         ###   ########.fr       */
+/*   Updated: 2017/03/13 20:51:22 by bbetz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,6 @@ typedef struct			s_commands
 	char				*line;
 	unsigned char		number_of_bytes;
 	unsigned char		*output_to_file;
-	char				recp_label_needed;
 	t_params			p;
 	struct s_commands	*prev;
 	struct s_commands	*nxt;
@@ -86,10 +85,11 @@ void					trimard(char *line);
 */
 void					handle_commands(t_commands *cmd, int *infos);
 /*
-**
+** <create_cor_file.c>
 */
+void					create_cor_file(t_commands *cmd, char *n, char n_c_str[3000], int p);
 
-void	name_comment(char *line, int fd, int *infos);
+void	name_comment(char *line, char n_c_str[3000], int *p, int *infos);
 void	assembler(char *name);
 //int		check_commands(char *line, int cor_fd, int *infos);
 int		is_labelchars(char c);
